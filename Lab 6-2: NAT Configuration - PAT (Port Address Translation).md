@@ -18,7 +18,7 @@ ip address 30.0.0.1 255.0.0.0
 no shutdown
 exit
 
-text
+
 
 #### Router 2
 
@@ -33,7 +33,6 @@ ip address 30.0.0.2 255.0.0.0
 no shutdown
 exit
 
-text
 
 ### Configure Routing
 
@@ -44,7 +43,7 @@ configure terminal
 ip route 0.0.0.0 0.0.0.0 30.0.0.2
 end
 
-text
+
 
 ### Configure PAT on Router 1
 
@@ -59,26 +58,25 @@ interface Serial 0/0/0
 ip nat outside
 exit
 
-text
 
 2.  **Create Address Pool**
 
 ip nat pool test 30.0.0.120 30.0.0.120 netmask 255.0.0.0
 
-text
+
 
 3.  **Create Access List**
 
 access-list 1 permit 192.168.0.0 0.0.0.255
 
-text
+
 
 4.  **Assign Pool and Access Rule**
 
 ip nat inside source list 1 pool test overload
 end
 
-text
+
 
 ### Verification
 
@@ -87,7 +85,7 @@ From a PC, access the web service on the server (20.0.0.2).  Then, check the NAT
 enable
 show ip nat translations
 
-text
+
 
 The output should show translations similar to this:
 
@@ -95,7 +93,6 @@ Pro Inside global Inside local Outside local Outside global
 icmp 30.0.0.120:1 192.168.0.7:1 20.0.0.2:1 20.0.0.2:1
 icmp 30.0.0.120:2 192.168.0.7:2 20.0.0.2:2 20.0.0.2:2
 
-text
 
 ### Tech Journal Entries - Key Commands and Explanation
 
